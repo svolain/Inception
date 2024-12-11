@@ -1,0 +1,60 @@
+volumes:
+    wordpress:
+        driver: local
+        driver_opts:
+          type: none
+          device: /home/vsavolai/data/wordpress
+          o: bind
+    mariadb:
+        driver: local
+        driver_opts:
+          type: none
+          device: /home/vsavolai/data/mariadb
+          o: bind
+
+networks:
+    inception:
+        name: incpetion
+        driver: bridge
+
+services:
+    nginx:
+        container_name: nginx
+        build: ./requirements/nginx
+        image: nginx
+        ports:
+            - "443:443"
+        depends_on:
+            - wordpress
+        volumes:
+            - wordpress:/var/www/html
+        env_file:
+            - .env
+        networks:
+            - inception
+        restart: always
+
+    wordpress:
+        container_name: wordpress
+        build: ./requirements/wordpress
+        image: wordpress
+        depends_on:
+            - mariadb
+        volumes:
+            - wordpress:/var/www/html
+        env_file:
+            - .env
+        networks:
+            - inception
+        restart: always
+
+    mariadb:
+        container_name: mariadb
+        build: ./requirements/mariadb
+        image: mariadb
+        volumes:
+            - mariadb:/var/lib/mysql
+        env_file: .env
+        networks: 
+            - inception
+        restart: always
