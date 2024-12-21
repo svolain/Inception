@@ -1,6 +1,6 @@
 # Inception
 
-Inception is a system administration project that focuses on building a containerized web infrastructure using Docker. It sets up and secures services like NGINX, WordPress, and MariaDB, creating custom Docker images and ensuring communication via a dedicated network. This project emphasizes best practices, security, and hands-on learning of essential DevOps skills.
+Inception is a system administration project that focuses on building a containerized web infrastructure using Docker. It sets up and secures services like NGINX, WordPress, and MariaDB, creating custom Docker images and ensuring communication via a dedicated network. This project emphasizes hands-on learning of essential DevOps skills.
 
 ![inception map](/public/inception.jpg)
 
